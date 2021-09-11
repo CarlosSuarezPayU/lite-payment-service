@@ -18,6 +18,11 @@ import com.senior.test.litepaymentservice.usecase.share.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Class implementation to process the payment request.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -42,6 +47,7 @@ public class PaymentUseCaseImpl implements PaymentUseCase {
 		final var response = LitePaymentResponse.builder();
 		if (isValidPaymentRequest(litePaymentRequest)) {
 			final var transaction = saveTransactionInDatabase(litePaymentRequest);
+			log.info("Transaction id: [{}] was saved in database with state [{}]", transaction.getId(), transaction.getState());
 			if (!isAFraudulentOperation(litePaymentRequest, transaction, response)) {
 				processPayment(litePaymentRequest, transaction, response);
 			}
@@ -75,6 +81,7 @@ public class PaymentUseCaseImpl implements PaymentUseCase {
 			antiFraudMapper.toLiteResponse(antiFraudResponse, transaction, response);
 		}
 		transactionRepository.save(transaction);
+		log.info("Transaction id: [{}] was saved in database with state [{}]", transaction.getId(), transaction.getState());
 
 		return antiFraudResponse.isFraud();
 	}
@@ -89,6 +96,7 @@ public class PaymentUseCaseImpl implements PaymentUseCase {
 		transaction.setState(bankPaymentResponse.getResponseCode().getTransactionState());
 		transaction.setNetworkCodeResponse(bankPaymentResponse.getResponseCode().getResponseCode());
 		transactionRepository.save(transaction);
+		log.info("Transaction id: [{}] was saved in database with state [{}]", transaction.getId(), transaction.getState());
 
 		paymentMapper.toLitePayment(bankPaymentResponse, transaction.getTransactionType(), response);
 	}

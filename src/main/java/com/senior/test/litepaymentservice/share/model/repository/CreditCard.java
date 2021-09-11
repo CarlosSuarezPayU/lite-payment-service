@@ -18,6 +18,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Credit card entity structure.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Builder(setterPrefix = "with")
 @Getter
 @Setter

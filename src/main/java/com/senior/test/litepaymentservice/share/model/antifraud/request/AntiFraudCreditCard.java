@@ -7,6 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Credit card model for anti fraud service.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

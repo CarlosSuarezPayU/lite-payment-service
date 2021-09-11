@@ -6,7 +6,14 @@ import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.mod
 import com.senior.test.litepaymentservice.share.exception.PaymentException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Payment business validator.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PaymentValidator {
 
@@ -21,6 +28,7 @@ public class PaymentValidator {
 			isValid = false;
 		}
 		if (!isValid) {
+			log.warn("The payment request had errors.");
 			throw new PaymentException(messageError.toString());
 		}
 		return isValid;

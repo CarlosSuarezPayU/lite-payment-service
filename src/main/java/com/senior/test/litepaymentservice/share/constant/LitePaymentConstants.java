@@ -1,5 +1,10 @@
 package com.senior.test.litepaymentservice.share.constant;
 
+/**
+ * Constants value definition.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 public class LitePaymentConstants {
 
 	public static final String NETWORK_NAME = "lite";

@@ -11,6 +11,11 @@ import com.senior.test.litepaymentservice.share.model.refund.reponse.BankRefundR
 import com.senior.test.litepaymentservice.share.model.refund.request.BankRefundRequest;
 import com.senior.test.litepaymentservice.share.model.repository.Transaction;
 
+/**
+ * Mapper definition of payment controller requests to bank payment classes.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 public interface PaymentMapper {
 
 	BankPaymentRequest toBank(final LitePaymentRequest litePaymentRequest, final String transactionId);

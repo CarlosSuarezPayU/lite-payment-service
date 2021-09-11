@@ -15,6 +15,11 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Mapper implementation of repository entities to controller request classes.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Slf4j
 @Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

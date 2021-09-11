@@ -20,6 +20,11 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Mapper implementation of payment controller requests to bank payment classes.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Slf4j
 @Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -47,6 +52,9 @@ public class PaymentMapperImpl implements PaymentMapper {
 				.withResponseCode(bankPaymentResponse.getResponseCode().getResponseCode())
 				.withResponseMessage(bankPaymentResponse.getMessage())
 				.withTransactionCreation(bankPaymentResponse.getCreationDate());
+
+		log.info("Transaction id: [{}] was [{}] by bank network message: [{}]", bankPaymentResponse.getTransactionId(),
+				 bankPaymentResponse.getResponseCode().getTransactionState(), bankPaymentResponse.getMessage());
 	}
 
 	@Override public BankRefundRequest toBank(final LiteRefundRequest liteRefundRequest, final Transaction transaction) {
@@ -69,6 +77,9 @@ public class PaymentMapperImpl implements PaymentMapper {
 				.withResponseCode(bankRefundResponse.getResponseCode().getResponseCode())
 				.withResponseMessage(bankRefundResponse.getMessage())
 				.withTransactionCreation(bankRefundResponse.getCreationDate());
+
+		log.info("Transaction id: [{}] was [{}] by bank network message: [{}]", bankRefundResponse.getTransactionId(),
+				 bankRefundResponse.getResponseCode().getTransactionState(), bankRefundResponse.getMessage());
 	}
 
 	private BankPaymentCreditCard buildBankPaymentCreditCard(final CreditCard creditCard) {

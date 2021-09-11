@@ -12,6 +12,11 @@ import com.senior.test.litepaymentservice.application.wiremock.model.MockPropert
 import com.senior.test.litepaymentservice.application.wiremock.model.MockServerConfiguration;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Class to init the mock services.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Slf4j
 public class MockServerStarter {
 
@@ -29,7 +34,7 @@ public class MockServerStarter {
 		if (!mockServiceProperties.getServices().isEmpty()) {
 
 			mockServiceProperties.getServices().forEach((s, mockProperties) -> {
-				log.info("Starting Mock to service [{}]", s);
+				log.info("Starting mock service [{}]", s);
 				new WireMockServer(buildMockProperties(mockProperties)).start();
 			});
 

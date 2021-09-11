@@ -14,6 +14,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * Credit card model for payment controller.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)

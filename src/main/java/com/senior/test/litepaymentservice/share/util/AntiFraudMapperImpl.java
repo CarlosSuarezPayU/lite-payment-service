@@ -18,13 +18,17 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Mapper implementation of anti fraud classes.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Slf4j
 @Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AntiFraudMapperImpl implements AntiFraudMapper {
 
 	@Override public AntiFraudRequest toAntiFraud(final LitePaymentRequest litePaymentRequest) {
-
 		return AntiFraudRequest.builder()
 							   .withPayer(buildAntiFraudPayer(litePaymentRequest.getPayer()))
 							   .withCreditCard(buildAntiFraudCreditCard(litePaymentRequest.getCreditCard()))
@@ -41,6 +45,8 @@ public class AntiFraudMapperImpl implements AntiFraudMapper {
 				.withResponseCode(String.valueOf(antiFraudResponse.isFraud()))
 				.withResponseMessage(antiFraudResponse.getMessage())
 				.withTransactionCreation(transaction.getCreationDate());
+
+		log.info("Transaction id: [{}] was declined by anti fraud message: [{}]", transaction.getId(), antiFraudResponse.getMessage());
 	}
 
 	@Override public AntiFraudRequest toAntiFraud(final LiteRefundRequest LiteRefundRequest) {
@@ -60,6 +66,8 @@ public class AntiFraudMapperImpl implements AntiFraudMapper {
 				.withResponseCode(String.valueOf(antiFraudResponse.isFraud()))
 				.withResponseMessage(antiFraudResponse.getMessage())
 				.withTransactionCreation(transaction.getCreationDate());
+
+		log.info("Transaction id: [{}] was declined by anti fraud message: [{}]", transaction.getId(), antiFraudResponse.getMessage());
 	}
 
 	private AntiFraudCreditCard buildAntiFraudCreditCard(final CreditCard paymentRequestCreditCard) {

@@ -16,6 +16,11 @@ import com.senior.test.litepaymentservice.usecase.share.RepositoryMapper;
 import com.senior.test.litepaymentservice.usecase.share.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Class implementation to process the refund request.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Slf4j
 @Service
 public class RefundUseCaseImpl implements RefundUseCase {
@@ -51,6 +56,7 @@ public class RefundUseCaseImpl implements RefundUseCase {
 		final var response = LiteRefundResponse.builder();
 		if (isValidRefundRequest(liteRefundRequest)) {
 			final var transaction = createRefundTransaction(getParentTransactionFromDatabase(liteRefundRequest.getTransactionParentId()));
+			log.info("Transaction id: [{}] was saved in database with state [{}]", transaction.getId(), transaction.getState());
 			if (!isAFraudulentOperation(liteRefundRequest, transaction, response)) {
 				processRefund(liteRefundRequest, transaction, response);
 			}
@@ -87,6 +93,7 @@ public class RefundUseCaseImpl implements RefundUseCase {
 			antiFraudMapper.toLiteResponse(antiFraudResponse, transaction, response);
 		}
 		transactionRepository.save(transaction);
+		log.info("Transaction id: [{}] was saved in database with state [{}]", transaction.getId(), transaction.getState());
 
 		return antiFraudResponse.isFraud();
 	}
@@ -101,6 +108,7 @@ public class RefundUseCaseImpl implements RefundUseCase {
 		transaction.setState(bankRefundResponse.getResponseCode().getTransactionState());
 		transaction.setNetworkCodeResponse(bankRefundResponse.getResponseCode().getResponseCode());
 		transactionRepository.save(transaction);
+		log.info("Transaction id: [{}] was saved in database with state [{}]", transaction.getId(), transaction.getState());
 
 		paymentMapper.toLitePayment(bankRefundResponse, transaction.getTransactionType(), response);
 	}

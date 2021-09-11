@@ -8,6 +8,11 @@ import com.senior.test.litepaymentservice.share.model.antifraud.AntiFraudRespons
 import com.senior.test.litepaymentservice.share.model.antifraud.request.AntiFraudRequest;
 import com.senior.test.litepaymentservice.share.model.repository.Transaction;
 
+/**
+ * Mapper definition of anti fraud classes.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 public interface AntiFraudMapper {
 
 	AntiFraudRequest toAntiFraud(final LitePaymentRequest litePaymentRequest);

@@ -4,6 +4,11 @@ import static com.senior.test.litepaymentservice.share.constant.LitePaymentConst
 import static com.senior.test.litepaymentservice.share.constant.LitePaymentConstants.MASK_RIGHT_LENGTH;
 import static com.senior.test.litepaymentservice.share.constant.LitePaymentConstants.MASK_VALUE;
 
+/**
+ * Utils methods for lite payment.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 public class LitePaymentUtil {
 
 	public static String maskCreditCardNumber(final String fullCreditCardNumber) {

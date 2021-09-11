@@ -5,6 +5,11 @@ import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * Configuration to read mock properties to from the properties.yaml.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @ConfigurationProperties(prefix = "wiremock.mocks")
 public class MockServerConfiguration {
 

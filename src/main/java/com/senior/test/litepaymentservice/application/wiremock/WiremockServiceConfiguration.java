@@ -4,7 +4,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.senior.test.litepaymentservice.application.wiremock.model.MockServerConfiguration;
-
+/**
+ * Inject mock services.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Configuration
 @EnableConfigurationProperties(MockServerConfiguration.class)
 public class WiremockServiceConfiguration {

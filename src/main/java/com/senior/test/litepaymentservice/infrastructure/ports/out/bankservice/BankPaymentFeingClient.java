@@ -7,6 +7,11 @@ import com.senior.test.litepaymentservice.share.model.payment.response.BankPayme
 import com.senior.test.litepaymentservice.share.model.refund.reponse.BankRefundResponse;
 import com.senior.test.litepaymentservice.share.model.refund.request.BankRefundRequest;
 
+/**
+ * Bank network feign client definition.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @FeignClient(name = "network", url = "${services.network.url}")
 public interface BankPaymentFeingClient {
 

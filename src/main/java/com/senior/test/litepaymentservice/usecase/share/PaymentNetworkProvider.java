@@ -5,6 +5,11 @@ import com.senior.test.litepaymentservice.share.model.payment.response.BankPayme
 import com.senior.test.litepaymentservice.share.model.refund.reponse.BankRefundResponse;
 import com.senior.test.litepaymentservice.share.model.refund.request.BankRefundRequest;
 
+/**
+ * Defines the operations provided by the bank network.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 public interface PaymentNetworkProvider {
 
 	BankPaymentResponse doPayment(final BankPaymentRequest bankPaymentRequest);

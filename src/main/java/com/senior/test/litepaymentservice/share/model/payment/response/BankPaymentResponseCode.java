@@ -4,6 +4,11 @@ import com.senior.test.litepaymentservice.share.model.TransactionState;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Response codes for bank service.
+ *
+ * @author <a href='carlos.suarez@payu.com'>Carlos Eduardo Suárez Silvestre</a>
+ */
 @Getter
 @AllArgsConstructor
 public enum BankPaymentResponseCode {
