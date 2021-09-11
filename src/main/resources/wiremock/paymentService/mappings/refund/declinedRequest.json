@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPattern": "/bank-network/refund",
+    "bodyPatterns": [
+      {"matchesJsonPath" : "$.transactionId"},
+      {"matchesJsonPath" : "$.amount"},
+      {"matchesJsonPath" : "$.payerIdentificationId"},
+      {"matchesJsonPath" : "$.cardNumber"},
+      {"matchesJsonPath" : {
+        "expression": "$.cardNumber",
+        "contains": "4242424242424242"
+      }}
+    ]
+  },
+
+  "response": {
+    "status": 200,
+    "bodyFileName": "response/refund/declined.json",
+    "headers": {
+      "Content-Type": "application/json",
+      "Connection" : "keep-alive",
+      "Access-Control-Allow-Headers " : "origin, content-type",
+      "Access-Control-Allow-Origin " : "*",
+      "Access-Control-Allow-Credentials" : "true",
+      "Access-Control-Allow-Methods " : "GET, POST, PUT, DELETE, OPTIONS, HEAD"
+    },
+    "transformers": ["response-template"]
+  }
+}

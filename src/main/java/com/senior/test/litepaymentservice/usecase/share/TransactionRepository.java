@@ -7,4 +7,6 @@ import com.senior.test.litepaymentservice.share.model.repository.Transaction;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, String> {
 
+	Transaction findByIdContains(final String id);
+
 }

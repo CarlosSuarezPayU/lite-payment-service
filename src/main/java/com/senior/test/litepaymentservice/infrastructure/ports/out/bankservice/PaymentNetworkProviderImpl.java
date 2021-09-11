@@ -17,13 +17,16 @@ public class PaymentNetworkProviderImpl implements PaymentNetworkProvider {
 	private final BankPaymentFeingClient bankPaymentFeingClient;
 
 	@Override public BankPaymentResponse doPayment(final BankPaymentRequest bankPaymentRequest) {
+
 		final var response = bankPaymentFeingClient.createPayment(bankPaymentRequest);
-		log.info("Response from Bank-Client {}", response);
+		log.info("Feing client payment response {}", response);
 		return response;
 	}
 
 	@Override public BankRefundResponse doRefund(final BankRefundRequest bankRefundRequest) {
 
-		return null;
+		final var response = bankPaymentFeingClient.createRefund(bankRefundRequest);
+		log.info("Feing client refund response  {}", response);
+		return response;
 	}
 }

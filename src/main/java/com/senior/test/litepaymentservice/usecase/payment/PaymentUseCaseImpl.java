@@ -39,9 +39,9 @@ public class PaymentUseCaseImpl implements PaymentUseCase {
 
 	@Override public LitePaymentResponse execute(final LitePaymentRequest litePaymentRequest) {
 
-		final var transaction = saveTransactionInDatabase(litePaymentRequest);
 		final var response = LitePaymentResponse.builder();
-		if (isValidPaymentRequest(litePaymentRequest, response)) {
+		if (isValidPaymentRequest(litePaymentRequest)) {
+			final var transaction = saveTransactionInDatabase(litePaymentRequest);
 			if (!isAFraudulentOperation(litePaymentRequest, transaction, response)) {
 				processPayment(litePaymentRequest, transaction, response);
 			}
@@ -62,15 +62,15 @@ public class PaymentUseCaseImpl implements PaymentUseCase {
 	}
 
 	private boolean isAFraudulentOperation(final LitePaymentRequest litePaymentRequest,
-										final Transaction transaction,
-										final LitePaymentResponse.LitePaymentResponseBuilder response) {
+										   final Transaction transaction,
+										   final LitePaymentResponse.LitePaymentResponseBuilder response) {
 
 		var antiFraudResponse = antifraudProvider.validateOperation(antiFraudMapper.toAntiFraud(litePaymentRequest));
 
 		transaction.setAntiFraudResponse(String.valueOf(antiFraudResponse.isFraud()));
 		transaction.setMessage(antiFraudResponse.getMessage());
 
-		if(antiFraudResponse.isFraud()){
+		if (antiFraudResponse.isFraud()) {
 			transaction.setState(TransactionState.DECLINED);
 			antiFraudMapper.toLiteResponse(antiFraudResponse, transaction, response);
 		}
@@ -82,7 +82,6 @@ public class PaymentUseCaseImpl implements PaymentUseCase {
 	private void processPayment(final LitePaymentRequest litePaymentRequest,
 								final Transaction transaction,
 								final LitePaymentResponse.LitePaymentResponseBuilder response) {
-
 
 		var bankPaymentResponse = paymentNetworkProvider.doPayment(paymentMapper.toBank(litePaymentRequest, transaction.getId()));
 

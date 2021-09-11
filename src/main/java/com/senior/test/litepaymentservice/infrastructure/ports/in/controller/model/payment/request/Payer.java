@@ -9,31 +9,33 @@ import com.senior.test.litepaymentservice.share.model.IdentificationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class Payer {
 
 	@NotBlank
-	private final String fullName;
+	private String fullName;
 
 	@NotBlank
-	private final String identification;
+	private String identification;
 
 	@NotBlank
 	@Enumerated(value = EnumType.STRING)
-	private final IdentificationType identificationType;
+	private IdentificationType identificationType;
 
 	@NotBlank
-	private final String email;
+	private String email;
 
 	@NotBlank
-	private final String address;
+	private String address;
 
-	private final String phone;
+	private String phone;
 
 }

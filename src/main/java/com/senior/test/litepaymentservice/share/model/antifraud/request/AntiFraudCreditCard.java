@@ -4,21 +4,23 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class AntiFraudCreditCard {
 
-	private final String creditCardNumber;
+	private String creditCardNumber;
 
-	private final String securityCode;
+	private String securityCode;
 
-	private final String expirationDate;
+	private String expirationDate;
 
-	private final String name;
+	private String name;
 
 }

@@ -8,29 +8,29 @@ import com.senior.test.litepaymentservice.share.model.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class LitePaymentRequest {
 
-	@NotNull(message = "The transaction type is mandatory")
-	@Valid
-	private final TransactionType transactionType;
+	private TransactionType transactionType;
 
 	@NotNull(message = "The payer info is mandatory")
 	@Valid
-	private final Payer payer;
+	private Payer payer;
 
 	@NotNull(message = "The amount info is mandatory")
 	@Valid
-	private final Amount amount;
+	private Amount amount;
 
 	@NotNull(message = "The credit card info is mandatory")
 	@Valid
-	private final CreditCard creditCard;
+	private CreditCard creditCard;
 
 }

@@ -7,22 +7,23 @@ import com.senior.test.litepaymentservice.share.model.payment.response.BankPayme
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class BankRefundResponse {
 
-	private final String transactionId;
+	private String transactionId;
 
-	private final Timestamp creationDate;
+	private Timestamp creationDate;
 
-	private final BankPaymentResponseCode responseCode;
+	private BankPaymentResponseCode responseCode;
 
-	private final String message;
-
+	private String message;
 
 }

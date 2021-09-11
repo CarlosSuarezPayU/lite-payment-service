@@ -1,0 +1,6 @@
+{
+  "transactionId": "{{jsonPath request.body '$.transactionId'}}",
+  "creationDate": "{{now format='epoch'}}",
+  "responseCode": "NOT_ALLOW",
+  "message": "Operation not allow."
+}

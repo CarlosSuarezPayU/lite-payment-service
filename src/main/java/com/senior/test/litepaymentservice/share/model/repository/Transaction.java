@@ -1,11 +1,13 @@
 package com.senior.test.litepaymentservice.share.model.repository;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,7 +20,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.senior.test.litepaymentservice.share.model.CountryCurrency;
 import com.senior.test.litepaymentservice.share.model.TransactionState;
 import com.senior.test.litepaymentservice.share.model.TransactionType;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Transaction {
+public class Transaction implements Serializable {
+
+	private static final long serialVersionUID = 6925895790227968521L;
 
 	@Id
 	@GeneratedValue(generator = "UUID")
@@ -62,7 +65,7 @@ public class Transaction {
 	@UpdateTimestamp
 	private Timestamp lastUpdateDate;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PAYMENT_ORDER_ID", referencedColumnName = "ID")
 	private PaymentOrder paymentOrder;
 

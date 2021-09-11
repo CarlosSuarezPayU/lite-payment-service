@@ -8,25 +8,27 @@ import com.senior.test.litepaymentservice.share.model.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class LitePaymentResponse {
 
-	private final String transactionId;
+	private String transactionId;
 
-	private final TransactionType transactionType;
+	private TransactionType transactionType;
 
-	private final TransactionState transactionState;
+	private TransactionState transactionState;
 
-	private final String responseCode;
+	private String responseCode;
 
-	private final String responseMessage;
+	private String responseMessage;
 
-	private final Timestamp transactionCreation;
+	private Timestamp transactionCreation;
 
 }

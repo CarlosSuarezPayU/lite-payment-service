@@ -1,8 +1,5 @@
 package com.senior.test.litepaymentservice.share.model.payment.request;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

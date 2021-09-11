@@ -16,6 +16,7 @@ public class AntiFraudProviderImpl implements AntiFraudProvider {
 
 	@Override
 	public AntiFraudResponse validateOperation(final AntiFraudRequest antiFraudRequest) {
+
 		return antiFraudServiceFeingClient.validateOperation(antiFraudRequest);
 	}
 

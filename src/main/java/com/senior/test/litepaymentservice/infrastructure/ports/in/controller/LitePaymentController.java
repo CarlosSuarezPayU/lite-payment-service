@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,14 +28,15 @@ public class LitePaymentController {
 	private final RefundUseCase refundUseCase;
 
 	@PostMapping("/payment")
-	public ResponseEntity<LitePaymentResponse> createLitePayment(@Valid @RequestBody final LitePaymentRequest litePaymentRequest){
+	public ResponseEntity<LitePaymentResponse> createLitePayment(@Valid @RequestBody final LitePaymentRequest litePaymentRequest) {
+
 		return new ResponseEntity<>(paymentUseCase.execute(litePaymentRequest), HttpStatus.ACCEPTED);
 	}
 
 	@PostMapping("/refund")
-	public ResponseEntity<LiteRefundResponse> createLitePayment(@Valid @RequestBody final LiteRefundRequest liteRefundRequest){
+	public ResponseEntity<LiteRefundResponse> createLitePayment(@Valid @RequestBody final LiteRefundRequest liteRefundRequest) {
+
 		return new ResponseEntity<>(refundUseCase.execute(liteRefundRequest), HttpStatus.ACCEPTED);
 	}
-
 
 }

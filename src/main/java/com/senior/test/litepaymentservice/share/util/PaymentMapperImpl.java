@@ -6,11 +6,13 @@ import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.mod
 import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.LitePaymentRequest;
 import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.response.LitePaymentResponse;
 import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.refund.request.LiteRefundRequest;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.refund.response.LiteRefundResponse;
 import com.senior.test.litepaymentservice.share.model.TransactionType;
 import com.senior.test.litepaymentservice.share.model.payment.request.BankPaymentAmount;
 import com.senior.test.litepaymentservice.share.model.payment.request.BankPaymentCreditCard;
 import com.senior.test.litepaymentservice.share.model.payment.request.BankPaymentRequest;
 import com.senior.test.litepaymentservice.share.model.payment.response.BankPaymentResponse;
+import com.senior.test.litepaymentservice.share.model.refund.reponse.BankRefundResponse;
 import com.senior.test.litepaymentservice.share.model.refund.request.BankRefundRequest;
 import com.senior.test.litepaymentservice.share.model.repository.Transaction;
 import com.senior.test.litepaymentservice.usecase.share.PaymentMapper;
@@ -47,12 +49,26 @@ public class PaymentMapperImpl implements PaymentMapper {
 				.withTransactionCreation(bankPaymentResponse.getCreationDate());
 	}
 
-	@Override public BankRefundRequest toBankRefundRequest(final Transaction transaction) {
+	@Override public BankRefundRequest toBank(final LiteRefundRequest liteRefundRequest, final Transaction transaction) {
 
 		return BankRefundRequest.builder()
 								.withTransactionId(transaction.getId())
 								.withAmount(transaction.getAmount())
+								.withCardNumber(liteRefundRequest.getCreditCard().getPanNumber())
+								.withPayerIdentificationId(liteRefundRequest.getPayer().getIdentification())
 								.build();
+	}
+
+	@Override public void toLitePayment(final BankRefundResponse bankRefundResponse, final TransactionType transactionType,
+										final LiteRefundResponse.LiteRefundResponseBuilder response) {
+
+		response
+				.withTransactionId(bankRefundResponse.getTransactionId())
+				.withTransactionType(transactionType)
+				.withTransactionState(bankRefundResponse.getResponseCode().getTransactionState())
+				.withResponseCode(bankRefundResponse.getResponseCode().getResponseCode())
+				.withResponseMessage(bankRefundResponse.getMessage())
+				.withTransactionCreation(bankRefundResponse.getCreationDate());
 	}
 
 	private BankPaymentCreditCard buildBankPaymentCreditCard(final CreditCard creditCard) {

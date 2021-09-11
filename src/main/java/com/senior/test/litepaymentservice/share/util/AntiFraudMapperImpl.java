@@ -5,6 +5,8 @@ import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.mod
 import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.LitePaymentRequest;
 import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.Payer;
 import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.response.LitePaymentResponse;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.refund.request.LiteRefundRequest;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.refund.response.LiteRefundResponse;
 import com.senior.test.litepaymentservice.share.model.TransactionState;
 import com.senior.test.litepaymentservice.share.model.antifraud.AntiFraudResponse;
 import com.senior.test.litepaymentservice.share.model.antifraud.request.AntiFraudCreditCard;
@@ -32,6 +34,25 @@ public class AntiFraudMapperImpl implements AntiFraudMapper {
 	@Override public void toLiteResponse(final AntiFraudResponse antiFraudResponse,
 										 final Transaction transaction,
 										 final LitePaymentResponse.LitePaymentResponseBuilder response) {
+
+		response.withTransactionId(transaction.getId())
+				.withTransactionType(transaction.getTransactionType())
+				.withTransactionState(TransactionState.DECLINED)
+				.withResponseCode(String.valueOf(antiFraudResponse.isFraud()))
+				.withResponseMessage(antiFraudResponse.getMessage())
+				.withTransactionCreation(transaction.getCreationDate());
+	}
+
+	@Override public AntiFraudRequest toAntiFraud(final LiteRefundRequest LiteRefundRequest) {
+
+		return AntiFraudRequest.builder()
+							   .withPayer(buildAntiFraudPayer(LiteRefundRequest.getPayer()))
+							   .withCreditCard(buildAntiFraudCreditCard(LiteRefundRequest.getCreditCard()))
+							   .build();
+	}
+
+	@Override public void toLiteResponse(final AntiFraudResponse antiFraudResponse, final Transaction transaction,
+										 final LiteRefundResponse.LiteRefundResponseBuilder response) {
 
 		response.withTransactionId(transaction.getId())
 				.withTransactionType(transaction.getTransactionType())

@@ -6,14 +6,14 @@ import static com.senior.test.litepaymentservice.share.constant.LitePaymentConst
 
 public class LitePaymentUtil {
 
-	public static String maskCreditCardNumber(final String fullCreditCardNumber){
+	public static String maskCreditCardNumber(final String fullCreditCardNumber) {
 
 		final var maskedCardNumber = new StringBuilder();
 
 		maskedCardNumber.append(fullCreditCardNumber.substring(0, MASK_RIGHT_LENGTH));
 		maskedCardNumber.append(MASK_VALUE);
-		maskedCardNumber.append(fullCreditCardNumber.substring(fullCreditCardNumber.length()-MASK_LEFT_LENGTH));
+		maskedCardNumber.append(fullCreditCardNumber.substring(fullCreditCardNumber.length() - MASK_LEFT_LENGTH));
 
-	return maskedCardNumber.toString();
+		return maskedCardNumber.toString();
 	}
 }

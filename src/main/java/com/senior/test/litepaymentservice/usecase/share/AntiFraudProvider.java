@@ -5,6 +5,6 @@ import com.senior.test.litepaymentservice.share.model.antifraud.request.AntiFrau
 
 public interface AntiFraudProvider {
 
-AntiFraudResponse validateOperation(final AntiFraudRequest antiFraudRequest);
+	AntiFraudResponse validateOperation(final AntiFraudRequest antiFraudRequest);
 
 }

@@ -1,18 +1,15 @@
 package com.senior.test.litepaymentservice.share.model.repository;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.CreationTimestamp;
-import com.senior.test.litepaymentservice.share.model.IdentificationType;
 import javax.validation.constraints.NotNull;
+
+import com.senior.test.litepaymentservice.share.model.IdentificationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +22,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Payer {
+public class Payer implements Serializable {
+
+	private static final long serialVersionUID = 7698925081452073403L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

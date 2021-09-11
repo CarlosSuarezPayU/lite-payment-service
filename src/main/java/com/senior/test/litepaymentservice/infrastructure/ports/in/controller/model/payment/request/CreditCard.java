@@ -12,30 +12,32 @@ import com.senior.test.litepaymentservice.share.model.FranchiseCard;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Builder(setterPrefix = "with")
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreditCard {
 
 	@NotBlank
-	@Size(min=14, max=19)
-	private final String panNumber;
+	@Size(min = 14, max = 19)
+	private String panNumber;
 
 	@NotBlank
-	@Size(max=3)
-	private final String cvv2;
+	@Size(max = 3)
+	private String cvv2;
 
 	@NotBlank
 	@JsonFormat(pattern = "MM-yy")
-	private final String expirationDate;
+	private String expirationDate;
 
 	@NotBlank
-	private final String name;
+	private String name;
 
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
-	private final FranchiseCard franchiseCard;
+	private FranchiseCard franchiseCard;
 
 }

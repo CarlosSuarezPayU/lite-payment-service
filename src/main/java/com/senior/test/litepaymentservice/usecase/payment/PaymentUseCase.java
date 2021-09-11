@@ -7,5 +7,4 @@ public interface PaymentUseCase {
 
 	LitePaymentResponse execute(final LitePaymentRequest litePaymentRequest);
 
-
 }
