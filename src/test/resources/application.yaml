@@ -4,9 +4,9 @@ spring:
     name: LitePaymentService
   ##Database configuration
   datasource:
-    url: jdbc:postgresql://postgres:5432/company
-    username: liteuser
-    password: l1t3s3rvic3
+    url: jdbc:postgresql://localhost:5432/lite_test?currentSchema=public
+    username: postgres
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:

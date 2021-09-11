@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  #Postgres database configuration
+  postgres:
+    image: postgres:13.2
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+    environment:
+      - POSTGRES_DB=company
+      - POSTGRES_USER=liteuser
+      - POSTGRES_PASSWORD=l1t3s3rvic3
+  #Payment service configuration
+  lite-payment-service:
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+    build: ../
+    restart: always
+    ports:
+      - 8086:8086
+      - 9001:9001
+      - 9002:9002
+    depends_on:
+      - postgres
+    command: ["java", "-jar", "lite-payment-service.jar"]
+volumes:
+  postgres-data:
+    external: false
