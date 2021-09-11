@@ -2,13 +2,10 @@ package com.senior.test.litepaymentservice.share.util;
 
 import static com.senior.test.litepaymentservice.share.util.LitePaymentUtil.maskCreditCardNumber;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.LitePaymentRequest;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.LitePaymentRequest;
 import com.senior.test.litepaymentservice.share.model.TransactionState;
-import com.senior.test.litepaymentservice.share.model.payment.response.BankPaymentResponse;
+import com.senior.test.litepaymentservice.share.model.TransactionType;
 import com.senior.test.litepaymentservice.share.model.repository.CreditCard;
 import com.senior.test.litepaymentservice.share.model.repository.Payer;
 import com.senior.test.litepaymentservice.share.model.repository.PaymentOrder;
@@ -43,7 +40,19 @@ public class RepositoryMapperImpl implements RepositoryMapper {
 						  .build();
 	}
 
-	private Payer buildPayer(final LitePaymentRequest litePaymentRequest){
+	@Override public Transaction toTransactionFromParent(final Transaction parent) {
+
+		return Transaction.builder()
+						  .withTransactionType(TransactionType.REFUND)
+						  .withAmount(parent.getAmount())
+						  .withPaymentOrder(parent.getPaymentOrder())
+						  .withState(TransactionState.CREATED)
+						  .withCurrencyValue(parent.getCurrencyValue())
+						  .build();
+	}
+
+	private Payer buildPayer(final LitePaymentRequest litePaymentRequest) {
+
 		return Payer.builder()
 					.withFullName(litePaymentRequest.getPayer().getFullName())
 					.withIdentification(litePaymentRequest.getPayer().getIdentification())
@@ -54,13 +63,13 @@ public class RepositoryMapperImpl implements RepositoryMapper {
 					.build();
 	}
 
-	private CreditCard buildCreditCard(final LitePaymentRequest litePaymentRequest){
+	private CreditCard buildCreditCard(final LitePaymentRequest litePaymentRequest) {
+
 		return CreditCard.builder()
 						 .withPanNumber(maskCreditCardNumber(litePaymentRequest.getCreditCard().getPanNumber()))
 						 .withFranchiseCard(litePaymentRequest.getCreditCard().getFranchiseCard())
 						 .build();
 	}
-
 
 }
 

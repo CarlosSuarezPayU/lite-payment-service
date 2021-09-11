@@ -1,10 +1,10 @@
 package com.senior.test.litepaymentservice.share.util;
 
 import org.springframework.stereotype.Component;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.CreditCard;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.LitePaymentRequest;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.Payer;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.response.LitePaymentResponse;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.CreditCard;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.LitePaymentRequest;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.Payer;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.response.LitePaymentResponse;
 import com.senior.test.litepaymentservice.share.model.TransactionState;
 import com.senior.test.litepaymentservice.share.model.antifraud.AntiFraudResponse;
 import com.senior.test.litepaymentservice.share.model.antifraud.request.AntiFraudCreditCard;

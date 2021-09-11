@@ -1,4 +1,4 @@
-package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request;
+package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,7 +12,6 @@ import com.senior.test.litepaymentservice.share.model.FranchiseCard;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 
 @Builder(setterPrefix = "with")
 @Getter

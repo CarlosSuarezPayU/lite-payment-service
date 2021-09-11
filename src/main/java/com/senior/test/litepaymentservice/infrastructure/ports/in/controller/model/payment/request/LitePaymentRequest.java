@@ -1,4 +1,4 @@
-package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request;
+package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,6 @@ import com.senior.test.litepaymentservice.share.model.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")

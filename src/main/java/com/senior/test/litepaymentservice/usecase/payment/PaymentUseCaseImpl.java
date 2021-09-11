@@ -2,15 +2,10 @@ package com.senior.test.litepaymentservice.usecase.payment;
 
 import static com.senior.test.litepaymentservice.usecase.payment.PaymentValidator.isValidPaymentRequest;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.LitePaymentRequest;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.response.LitePaymentResponse;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.LitePaymentRequest;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.response.LitePaymentResponse;
 import com.senior.test.litepaymentservice.share.model.TransactionState;
-import com.senior.test.litepaymentservice.share.model.TransactionType;
-import com.senior.test.litepaymentservice.share.model.antifraud.AntiFraudResponse;
-import com.senior.test.litepaymentservice.share.model.payment.request.BankPaymentRequest;
-import com.senior.test.litepaymentservice.share.model.payment.response.BankPaymentResponse;
 import com.senior.test.litepaymentservice.share.model.repository.PaymentOrder;
 import com.senior.test.litepaymentservice.share.model.repository.Transaction;
 import com.senior.test.litepaymentservice.usecase.share.AntiFraudMapper;

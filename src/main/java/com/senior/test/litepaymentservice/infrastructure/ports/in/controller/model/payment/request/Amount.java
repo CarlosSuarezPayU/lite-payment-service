@@ -1,4 +1,4 @@
-package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request;
+package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request;
 
 import java.math.BigDecimal;
 
@@ -12,7 +12,6 @@ import com.senior.test.litepaymentservice.share.model.CountryCurrency;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")

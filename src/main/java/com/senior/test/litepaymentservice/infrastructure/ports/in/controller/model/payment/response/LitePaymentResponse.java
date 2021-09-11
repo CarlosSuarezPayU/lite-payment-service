@@ -1,4 +1,4 @@
-package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.response;
+package com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.response;
 
 import java.sql.Timestamp;
 
@@ -8,7 +8,6 @@ import com.senior.test.litepaymentservice.share.model.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder(setterPrefix = "with")

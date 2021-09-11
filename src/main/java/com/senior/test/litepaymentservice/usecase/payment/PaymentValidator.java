@@ -1,7 +1,7 @@
 package com.senior.test.litepaymentservice.usecase.payment;
 
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.LitePaymentRequest;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.response.LitePaymentResponse;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.LitePaymentRequest;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.response.LitePaymentResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

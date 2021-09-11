@@ -1,16 +1,18 @@
 package com.senior.test.litepaymentservice.share.util;
 
 import org.springframework.stereotype.Component;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.Amount;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.CreditCard;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.request.LitePaymentRequest;
-import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.response.LitePaymentResponse;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.Amount;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.CreditCard;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.request.LitePaymentRequest;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.payment.response.LitePaymentResponse;
+import com.senior.test.litepaymentservice.infrastructure.ports.in.controller.model.refund.request.LiteRefundRequest;
 import com.senior.test.litepaymentservice.share.model.TransactionType;
 import com.senior.test.litepaymentservice.share.model.payment.request.BankPaymentAmount;
 import com.senior.test.litepaymentservice.share.model.payment.request.BankPaymentCreditCard;
 import com.senior.test.litepaymentservice.share.model.payment.request.BankPaymentRequest;
 import com.senior.test.litepaymentservice.share.model.payment.response.BankPaymentResponse;
-import com.senior.test.litepaymentservice.share.model.repository.PaymentOrder;
+import com.senior.test.litepaymentservice.share.model.refund.request.BankRefundRequest;
+import com.senior.test.litepaymentservice.share.model.repository.Transaction;
 import com.senior.test.litepaymentservice.usecase.share.PaymentMapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -43,6 +45,14 @@ public class PaymentMapperImpl implements PaymentMapper {
 				.withResponseCode(bankPaymentResponse.getResponseCode().getResponseCode())
 				.withResponseMessage(bankPaymentResponse.getMessage())
 				.withTransactionCreation(bankPaymentResponse.getCreationDate());
+	}
+
+	@Override public BankRefundRequest toBankRefundRequest(final Transaction transaction) {
+
+		return BankRefundRequest.builder()
+								.withTransactionId(transaction.getId())
+								.withAmount(transaction.getAmount())
+								.build();
 	}
 
 	private BankPaymentCreditCard buildBankPaymentCreditCard(final CreditCard creditCard) {
