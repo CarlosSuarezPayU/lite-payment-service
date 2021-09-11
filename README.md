@@ -8,7 +8,7 @@ This project was implements using:
   * Postgres Database
   * Spring JPA
 
-The MVP is to manage payments and process their _authorizations,_ and _refunds_, uses an anti fraud
+The MVP is to manage payments and process their _payment,_ and _refunds_, uses an anti fraud
 validation service and before connect with the bank network service. The all transactions has saved 
 into the database. 
 
