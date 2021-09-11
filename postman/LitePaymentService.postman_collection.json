@@ -1,0 +1,428 @@
+{
+	"info": {
+		"_postman_id": "bceb8e48-fcf5-4acd-a297-4cec5297f142",
+		"name": "LitePaymentService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mocks",
+			"item": [
+				{
+					"name": "AntiFraud",
+					"item": [
+						{
+							"name": "AntiFraudSuccess",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"creditCard\":{\n        \"creditCardNumber\":\"4111111111111144\", \n        \"securityCode\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\"\n    },\n    \"payer\":{\n        \"fullName\":\"Payer Full Name\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/antifraud-validator/validate-operation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"antifraud-validator",
+										"validate-operation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AntiFraudFail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"creditCard\":{\n        \"creditCardNumber\":\"4111111111111111\", \n        \"securityCode\":\"000\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\"\n    },\n    \"payer\":{\n        \"fullName\":\"Payer Full Name\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9001/antifraud-validator/validate-operation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"antifraud-validator",
+										"validate-operation"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bank-Network",
+					"item": [
+						{
+							"name": "BankPaymentSuccess",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transactionId\":\"4f9abaab-f45f-4b8f-ae86-fcbdbeaa2054\",\n    \"payerIdentificationId\":\"1023495556\",\n    \"card\":{\n        \"panNumber\":\"4242424242424242\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\"\n    }, \n    \"amount\":{\n        \"value\":20000,\n        \"tax\":0, \n        \"total\":20000,\n        \"currency\":\"COP\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9002/bank-network/payment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9002",
+									"path": [
+										"bank-network",
+										"payment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BankPaymentFail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transactionId\":\"4f9abaab-f45f-4b8f-ae86-fcbdbeaa2054\",\n    \"payerIdentificationId\":\"1023495556\",\n    \"card\":{\n        \"panNumber\":\"4111111111111111\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\"\n    }, \n    \"amount\":{\n        \"value\":20000,\n        \"tax\":0, \n        \"total\":20000,\n        \"currency\":\"COP\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9002/bank-network/payment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9002",
+									"path": [
+										"bank-network",
+										"payment"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Approved",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"transactionParentId\", jsonData.transactionId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transactionType\": \"PAYMENT\",\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    },\n    \"amount\":{\n        \"value\":20000,\n        \"tax\":0, \n        \"total\":20000,\n        \"currency\":\"COP\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4111111111111112\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"transactionParentId\", jsonData.transactionId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    },\n    \"amount\":{\n        \"value\":20000,\n        \"tax\":0, \n        \"total\":20000,\n        \"currency\":\"COP\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4111111111111112\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Declined-Antifraud",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transactionType\": \"PAYMENT\",\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    },\n    \"amount\":{\n        \"value\":20000,\n        \"tax\":0, \n        \"total\":20000,\n        \"currency\":\"COP\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4111111111111155\",\n        \"cvv2\":\"000\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Declined-Network",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transactionType\": \"PAYMENT\",\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    },\n    \"amount\":{\n        \"value\":20000,\n        \"tax\":0, \n        \"total\":20000,\n        \"currency\":\"COP\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4111111111111111\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Refund",
+			"item": [
+				{
+					"name": "Approved",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"transactionParentId\":\"{{transactionParentId}}\",\n    \"transactionType\": \"REFUND\",\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4111111111111112\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/refund",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"refund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"transactionType\": \"REFUND\",\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4111111111111112\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/refund",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"refund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Declined-Antifraud",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"transactionParentId\":\"{{transactionParentId}}\",\n    \"transactionType\": \"REFUND\",\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4111111111111112\",\n        \"cvv2\":\"000\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/refund",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"refund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Declined-Network",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"transactionParentId\":\"{{transactionParentId}}\",\n    \"transactionType\": \"REFUND\",\n    \"payer\":{\n        \"fullName\":\"Carlos Suarez\",\n        \"identification\":\"1023495556\",\n        \"identificationType\":\"CC\",\n        \"email\":\"carlos.suarez@payu.com\",\n        \"address\":\"Calle 1 # 2-03\",\n        \"phone\":\"3123123342\"\n    }, \n    \"creditCard\":{\n        \"panNumber\":\"4242424242424242\",\n        \"cvv2\":\"777\",\n        \"expirationDate\":\"12-30\",\n        \"name\":\"Propietario Tarjeta\",\n        \"franchiseCard\":\"VISA\"\n    }   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/lite/refund",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"lite",
+								"refund"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
