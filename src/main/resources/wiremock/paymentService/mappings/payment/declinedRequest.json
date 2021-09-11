@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPattern": "/bank-network/payment",
+    "bodyPatterns": [
+      {"matchesJsonPath" : "$.transactionId"},
+      {"matchesJsonPath" : "$.payerIdentificationId"},
+      {"matchesJsonPath" : "$.card"},
+      {"matchesJsonPath" : {
+        "expression": "$.card.panNumber",
+        "contains": "4111111111111111"
+      }},
+      {"matchesJsonPath" : "$.amount"}
+    ]
+  },
+
+  "response": {
+    "status": 200,
+    "bodyFileName": "response/payment/declined.json",
+    "headers": {
+      "Content-Type": "application/json",
+      "Connection" : "keep-alive",
+      "Access-Control-Allow-Headers " : "origin, content-type",
+      "Access-Control-Allow-Origin " : "*",
+      "Access-Control-Allow-Credentials" : "true",
+      "Access-Control-Allow-Methods " : "GET, POST, PUT, DELETE, OPTIONS, HEAD"
+    },
+    "transformers": ["response-template"]
+  }
+}

@@ -1,0 +1,56 @@
+## Lite Payment Service Configuration
+spring:
+  application:
+    name: LitePaymentService
+  ##Database configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lite_test?currentSchema=public
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+## Server configuration
+server:
+  port: 8086
+
+## External services configuration
+services:
+  antifraud:
+    url: http://localhost:9001/antifraud-validator
+  network:
+    url: http://localhost:9002/bank-network
+
+## Feing configuration
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      antifraud:
+        connectionTimeout: 5000
+        readTimeout: 30000
+        loggerLevel: FULL
+      network:
+        connectionTimeout: 10000
+        readTimeout: 30000
+        loggerLevel: FULL
+
+## Wiremocks configuration
+wiremock:
+  mocks:
+    services:
+      antifraud-validator:
+        enabled: true
+        port: 9001
+        resourcesPath: wiremock/antifraudService
+      bank-network:
+        enabled: true
+        port: 9002
+        resourcesPath: wiremock/paymentService

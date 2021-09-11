@@ -1,0 +1,4 @@
+{
+  "isFraud": "true",
+  "message": "An error was detected in the card data. Possible fraud."
+}
