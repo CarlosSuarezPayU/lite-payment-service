@@ -42,6 +42,38 @@ feign:
         readTimeout: 30000
         loggerLevel: FULL
 
+## Circuit breaker configuration
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 100
+      permittedNumberOfCallsInHalfOpenState: 10
+      waitDurationInOpenState: 10000
+      failureRateThreshold: 60
+      eventConsumerBufferSize: 10
+      registerHealthIndicator: true
+  instances:
+    lite:
+      baseConfig: default
+      permittedNumberOfCallsInHalfOpenState: 10
+      minimumNumberOfCalls: 10
+      failureRateThreshold: 50
+      slowCallRateThreshold: 50
+      slowCallDurationThreshold: 25000
+      slidingWindowType: TIME_BASED
+      slidingWindowSize: 60
+      waitDurationInOpenState: 60s
+    anti-fraud:
+      baseConfig: default
+      permittedNumberOfCallsInHalfOpenState: 10
+      minimumNumberOfCalls: 10
+      failureRateThreshold: 50
+      slowCallRateThreshold: 50
+      slowCallDurationThreshold: 25000
+      slidingWindowType: TIME_BASED
+      slidingWindowSize: 60
+      waitDurationInOpenState: 60s
+
 ## Wiremocks configuration
 wiremock:
   mocks:

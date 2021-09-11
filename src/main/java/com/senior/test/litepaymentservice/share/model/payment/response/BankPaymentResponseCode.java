@@ -9,6 +9,7 @@ import lombok.Getter;
 public enum BankPaymentResponseCode {
 	SUCCESS("01", TransactionState.APPROVED),
 	INSUFFICIENT_FUNDS("30", TransactionState.DECLINED),
+	ERROR("50", TransactionState.ERROR),
 	NOT_ALLOW("40", TransactionState.DECLINED);
 	private final String responseCode;
 	private final TransactionState transactionState;

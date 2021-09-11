@@ -14,7 +14,7 @@
 
   "response": {
     "status": 200,
-    "bodyFileName": "response/antifraud/fail.json",
+    "bodyFileName": "response/antifraud/failAnti.json",
     "headers": {
       "Content-Type": "application/json",
       "Connection" : "keep-alive",

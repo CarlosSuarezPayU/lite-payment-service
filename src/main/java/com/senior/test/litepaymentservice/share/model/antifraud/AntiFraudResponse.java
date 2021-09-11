@@ -11,12 +11,11 @@ import lombok.ToString;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class AntiFraudResponse {
 
-	private boolean isFraud;
+	private final boolean isFraud;
 
-	private String message;
+	private final String message;
 
 }
